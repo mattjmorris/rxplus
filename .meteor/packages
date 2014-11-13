@@ -9,4 +9,6 @@ meteor-platform
 mrt:moment
 coffeescript
 mizzao:bootstrap-3
+accounts-ui
+accounts-facebook
 
