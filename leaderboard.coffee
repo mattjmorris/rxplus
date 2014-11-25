@@ -68,6 +68,7 @@ if Meteor.isClient
 
   Template.addNew.events {
     'submit': (event) ->
+      event.preventDefault()
       console.log event
       dateStr = event.target.date.value
       value = parseInt event.target.number.value
@@ -76,7 +77,10 @@ if Meteor.isClient
         Players.insert({name: Meteor.user().profile.name, value: value, date: new Date(dateStr)})
       else
         throw new Meteor.Error("Need a date and a value")
+
+    'click #cancel': (event) ->
       event.preventDefault()
+      Session.set("addingNew", false)
   }
 
   UI.registerHelper 'formatDate', (context, options) ->
