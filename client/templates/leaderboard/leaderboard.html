@@ -1,33 +1,33 @@
-<head>
-  <title>T2B</title>
-  <meta name="viewport" content="width=device-width, user-scalable=no">
-  <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600' rel='stylesheet' type='text/css'>
-</head>
-
-<body>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="pull-left">
-        {{#if currentUser}}
-          {{> newResultButton}}
-        {{/if}}
-      </div>
-      <div class="pull-right">{{> loginButtons}}</div>
-    </div>
-  </div>
-  <br>
-
+<template name="leaderboard">
   <div class="outer">
+
     {{> addNew }}
 
-    <h1 class="title">LCF T2B Leaderboard</h1>
+    {{#if currentUser}}
+      <div class="title"><a href="#">{{ title }} (+)</a></div>
+    {{else}}
+      <div class="title">{{ title }} </div>
+    {{/if}}
 
-    <div class="logo"></div>
-
-    <div>Select an athlete for details.</div>
-    {{> leaderboard}}
   </div>
-</body>
+  <table class="table table-striped">
+    <tbody>
+    <tr>
+      <th>#</th>
+      <th>Athlete</th>
+      <th>Result</th>
+    </tr>
+    {{#each leaderboardResults}}
+      <tr>
+        <td>{{ index }}</td>
+        <td>{{ athleteName }}</td>
+        <td>{{ value }}</td>
+      </tr>
+    {{/each}}
+    </tbody>
+  </table>
+
+</template>
 
 <template name="addNew">
   {{#if addingNew}}
@@ -55,10 +55,11 @@
         </span>
       </div>
     </form>
+    {{> results}}
   {{/if}}
 </template>
 
-<template name="leaderboard">
+<template name="results">
   <ol class="leaderboard">
     {{#each players}}
       {{> player}}

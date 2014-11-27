@@ -1,0 +1,18 @@
+<template name="home">
+  <table class="table table-striped">
+    <tbody>
+      <tr>
+        <th>Challenge</th>
+        <th>Leader</th>
+        <th>Result</th>
+      </tr>
+      {{#each competitions}}
+      <tr>
+        <td><a class="href" href="/leaderboard/{{title}}"> {{ title }} </a></td>
+        <td>{{ topAthlete }}</td>
+        <td>{{ topResult }}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</template>

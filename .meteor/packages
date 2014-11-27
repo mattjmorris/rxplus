@@ -12,4 +12,5 @@ mizzao:bootstrap-3
 accounts-ui
 accounts-facebook
 service-configuration
+iron:router
 

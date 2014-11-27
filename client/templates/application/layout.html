@@ -1,0 +1,12 @@
+<template name="layout">
+  <div class="navbar navbar-fixed-top" role="navigation">
+      <span class="pull-left"><a class="btn" href="{{ pathFor 'home' }}">Home</a></span>
+      <span class="pull-right">
+        {{> loginButtons}}
+      </span>
+  </div>
+  <br>
+  <div class="container">
+    {{> yield}}
+  </div>
+</template>
