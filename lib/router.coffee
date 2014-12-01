@@ -13,9 +13,8 @@ Router.route '/leaderboard/:competitionName', {
     waitOn: ->
       [
         Meteor.subscribe('competitions', {name: @params.competitionName}),
-        Meteor.subscribe('results', {competition: @params.competitionName, athleteBest: true})
+        Meteor.subscribe('results', {competition: @params.competitionName, userBest: true})
       ]
     data: ->
-#      competitionName: @params.competitionName
       competition: Competitions.findOne({name: @params.competitionName})
   }

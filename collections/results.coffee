@@ -2,6 +2,7 @@
 
 # TODO - use check to validate doc fields
 @Results.before.insert (userId, doc) ->
+
   # add in user id to the document
   doc.userId = userId
 
@@ -10,15 +11,15 @@
   # add in competition id to the document
   doc.competitionId = competition._id
 
-  # is this the best for this athlete?
-  doc.athleteBest = true
-  existingResult = Results.findOne({competition: doc.competition, athleteName: doc.athleteName, athleteBest: true})
+  # is this the best for this user?
+  doc.userBest = true
+  existingResult = Results.findOne({competition: doc.competition, userName: doc.userName, userBest: true})
   if existingResult?
     if competition.sortOrder is 1
-      doc.athleteBest = false if doc.value >= existingResult.value
+      doc.userBest = false if doc.value >= existingResult.value
     else
-      doc.athleteBest = false if doc.value <= existingResult.value
-    Results.update({_id: existingResult._id}, {$set: {athleteBest: false}}) if doc.athleteBest
+      doc.userBest = false if doc.value <= existingResult.value
+    Results.update({_id: existingResult._id}, {$set: {userBest: false}}) if doc.userBest
 
   # is this the best result for the competition, for this gender?
   gender = Meteor.user().services.facebook.gender
