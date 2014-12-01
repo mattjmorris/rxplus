@@ -1,15 +1,14 @@
 <template name="leaderboard">
   <div class="outer">
-
     {{> addNew }}
 
     {{#if currentUser}}
-      <div class="title"><a href="#">{{ title }} (+)</a></div>
+      <div id="add-new" class="title"><a href="#">{{ competition.name }} (+)</a></div>
     {{else}}
-      <div class="title">{{ title }} </div>
+      <div class="title">{{ competition.name }} </div>
     {{/if}}
-
   </div>
+
   <table class="table table-striped">
     <tbody>
     <tr>
@@ -17,7 +16,7 @@
       <th>Athlete</th>
       <th>Result</th>
     </tr>
-    {{#each leaderboardResults}}
+    {{#each athleteTopResult}}
       <tr>
         <td>{{ index }}</td>
         <td>{{ athleteName }}</td>
@@ -76,12 +75,6 @@
     <span class="name">{{name}}</span>
     <span class="score">{{value}}</span>
   </li>
-</template>
-
-<template name="newResultButton">
-  <div>
-    <button id="add-new-result" class="btn btn-primary pull-right">Add New</button>
-  </div>
 </template>
 
 <template name="history">

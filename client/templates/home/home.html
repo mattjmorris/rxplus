@@ -3,14 +3,18 @@
     <tbody>
       <tr>
         <th>Challenge</th>
-        <th>Leader</th>
+        <th>Male</th>
+        <th>Result</th>
+        <th>Female</th>
         <th>Result</th>
       </tr>
       {{#each competitions}}
       <tr>
-        <td><a class="href" href="/leaderboard/{{title}}"> {{ title }} </a></td>
-        <td>{{ topAthlete }}</td>
-        <td>{{ topResult }}</td>
+        <td><a class="href" href="/leaderboard/{{name}}"> {{ name }} </a></td>
+        <td>{{ topMale.userName }}</td>
+        <td>{{ topMale.value }}</td>
+        <td>{{ topFemale.userName }}</td>
+        <td>{{ topFemale.value }}</td>
       </tr>
       {{/each}}
     </tbody>
