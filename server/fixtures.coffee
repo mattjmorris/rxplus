@@ -2,33 +2,38 @@ Meteor.startup ->
 
   if Competitions.find().count() is 0
     Competitions.insert {
-      name: "Space Apples"
-      description: "Eat the apples when you see them, but avoid the nectarines."
+      name: "T2B Chained"
+      description: "As many toes to bar as you can do without dropping off of the bar or touching the ground."
       sortOrder: -1
-      scheme: "amount"
-      topMale: { "userId": '1234', userName: "Alan Turing", value: 35 }
+      scheme: "reps"
+      topMale: { "userId": '1234', userName: "Alan Turing", reps: {amount: 35} }
       topFemale: {}
     }
-    ,
-      (error, id) ->
-        console.log id
 
     Competitions.insert {
-      name: "Water Bananas",
-      description: "Time it takes to eat 100 bananas under water"
+      name: "Burpies x 100",
+      description: "Time it takes to complete 100 burpies"
       sortOrder: 1
       scheme: "time"
-      topMale: {"userId": "YwcN8AqSE4L5pfDyP", userName: "Matt J. Morris", value: "6:50"}
+      topMale: {"userId": "1234", userName: "Alan Turing", time: {mins: 6, secs: 52}}
       topFemale: {}
     }
-    ,
-      (error, id) ->
-        console.log id
 
-  if Results.find().count() is 0
-    Results.direct.insert({competition: "Space Apples", userId: "YwcN8AqSE4L5pfDyP", userName: "Matt J. Morris", value: 26, userBest: false, date: moment('2014-11-08').toDate()})
-    Results.direct.insert({competition: "Space Apples", userId: "YwcN8AqSE4L5pfDyP", userName: "Matt J. Morris", value: 32, userBest: true, date: moment('2014-11-09').toDate()})
-    Results.direct.insert({competition: "Space Apples", userId: "1234", userName: "Alan Turing", value: 32, userBest: false, date: moment('2014-11-08').toDate()})
-    Results.direct.insert({competition: "Space Apples", userId: "1234", userName: "Alan Turing", value: 35, userBest: true, date: moment('2014-11-09').toDate()})
+    t2bId = Competitions.findOne({name: "T2B Chained"})._id
+    burpiesId = Competitions.findOne({name: "Burpies x 100"})._id
 
-    Results.direct.insert({competition:"Water Bananas", userId: "YwcN8AqSE4L5pfDyP", userName: "Matt J. Morris", value: "6:50", userBest: true, date: moment('2014-11-24').toDate()})
+#    Results.direct.insert(
+#      {
+#        competitionId: t2bId,
+#        competitionName: "T2B Chained",
+#        userId: "YwcN8AqSE4L5pfDyP",
+#        userName: "Matt J. Morris",
+#        value: 26,
+#        userBest: false,
+#        date: moment('2014-11-08').toDate()
+#      })
+#    Results.direct.insert({competitionId: t2bId, competitionName: "T2B Chained", userId: "YwcN8AqSE4L5pfDyP", userName: "Matt J. Morris", value: 32, userBest: true, date: moment('2014-11-09').toDate()})
+    Results.direct.insert({competitionId: t2bId, competitionName: "T2B Chained", userId: "1234", userName: "Alan Turing", reps: {amount: 32}, userBest: false, date: moment('2014-11-08').toDate()})
+    Results.direct.insert({competitionId: t2bId, competitionName: "T2B Chained", userId: "1234", userName: "Alan Turing", reps: {amount: 35}, userBest: true, date: moment('2014-11-09').toDate()})
+
+    Results.direct.insert({competitionId: burpiesId, competition:"Burpies x 100", userId: "1234", userName: "Alan Turing", time: {mins: 6, secs: 52}, userBest: true, date: moment('2014-11-24').toDate()})

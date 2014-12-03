@@ -8,13 +8,17 @@ Router.route '/',
     Meteor.subscribe('competitions', {})
   name: 'home'
 
-Router.route '/leaderboard/:competitionName', {
-    name: 'leaderboard'
+Router.route 'create',
+  name: 'create'
+
+  # TODO - change everything here to use ids, including the route
+Router.route '/competition/:_id', {
+    name: 'competition'
     waitOn: ->
       [
-        Meteor.subscribe('competitions', {name: @params.competitionName}),
-        Meteor.subscribe('results', {competition: @params.competitionName, userBest: true})
+        Meteor.subscribe('competitions', {_id: @params._id}),
+        Meteor.subscribe('results', {competitionId: @params._id, userBest: true})
       ]
     data: ->
-      competition: Competitions.findOne({name: @params.competitionName})
+      competition: Competitions.findOne({_id: @params._id})
   }

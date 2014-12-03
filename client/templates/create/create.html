@@ -1,0 +1,41 @@
+<template name="create">
+  <header>
+    <h2>New Challenge</h2>
+
+    <form role="form">
+      <div class="form-group">
+        <input type="text" name="name" class="form-control" placeholder="Competition Name">
+      </div>
+      <div class="form-group">
+        <input type="text" name="description" class="form-control" placeholder="Description">
+      </div>
+      <p class="help-block">What is being measured?</p>
+      <div class="radio">
+        <label>
+          <input type="radio" name="optionsMeasurement" id="reps" value="reps" checked>
+          Reps
+        </label>
+      </div>
+      <div class="radio">
+        <label>
+          <input type="radio" name="optionsMeasurement" id="time" value="time">
+          Time
+        </label>
+      </div>
+      <p class="help-block">What's better, a high result or a low result?</p>
+      <div class="radio">
+        <label>
+          <input type="radio" name="optionsBetter" id="high" value="high" checked>
+          High (usually the case with reps)
+        </label>
+      </div>
+      <div class="radio">
+        <label>
+          <input type="radio" name="optionsBetter" id="low" value="low">
+          Low (usually the case with time)
+        </label>
+      </div>
+      <button type="submit" id="new-competition" class="btn btn-primary">Create</button>
+    </form>
+  </header>
+</template>

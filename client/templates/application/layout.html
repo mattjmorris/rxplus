@@ -1,10 +1,15 @@
 <template name="layout">
   <div class="navbar navbar-fixed-top" role="navigation">
       <span class="pull-left"><a class="btn" href="{{ pathFor 'home' }}">Home</a></span>
+      {{#if currentUser}}
+        <span><a class="btn" href="{{ pathFor 'create' }}">Create</a></span>
+      {{/if}}
       <span class="pull-right">
         {{> loginButtons}}
       </span>
   </div>
+  <br>
+  {{> flashMessages}}
   <br>
   <div class="container">
     {{> yield}}
