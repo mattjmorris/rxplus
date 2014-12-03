@@ -10,6 +10,12 @@
     <div class="subtitle">{{ competition.description }}</div>
   </div>
 
+  <div class="row">
+    {{> chart_cp_overview}}
+  </div>
+  <br>
+  <br>
+
   <table class="table table-striped">
     <tbody>
     <tr>
@@ -26,7 +32,6 @@
     {{/each}}
     </tbody>
   </table>
-
 </template>
 
 <template name="addNew">
@@ -68,6 +73,10 @@
 </form>
 <!--{{> results}}-->
 {{/if}}
+</template>
+
+<template name="chart_cp_overview">
+  <div id="chart"></div>
 </template>
 
 <!--<template name="results">-->

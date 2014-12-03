@@ -72,3 +72,41 @@ Template.competition.events {
   'click #add-new': ->
     Session.set("addingNew", true)
 }
+
+Template.chart_cp_overview.created = ->
+  _.defer =>
+    Tracker.autorun =>
+      chart = c3.generate {
+        size: {
+          height: 100
+        },
+        data: {
+          columns: _.map Results.find({}).fetch(), (r) -> [r.userName, r.time?.totalSecs or r.reps?.amount],
+          types: {
+            data1: 'area',
+            data2: 'area'
+          }
+        }
+        grid: {
+          y: {
+            lines: [{value: Session.get('selectedSeconds'), text: Session.get('selectedName')}]
+          }
+        }
+        axis: {
+          rotated: true,
+          x: {
+            tick: {
+              values: []
+            }
+          }
+          y: {
+            label: if Competitions.findOne().scheme is 'reps' then 'reps' else 'total seconds'
+          }
+        }
+        legend: {
+          show: false
+        },
+        tooltip: {
+          grouped: false
+        }
+      }

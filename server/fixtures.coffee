@@ -36,4 +36,4 @@ Meteor.startup ->
     Results.direct.insert({competitionId: t2bId, competitionName: "T2B Chained", userId: "1234", userName: "Alan Turing", reps: {amount: 32}, userBest: false, date: moment('2014-11-08').toDate()})
     Results.direct.insert({competitionId: t2bId, competitionName: "T2B Chained", userId: "1234", userName: "Alan Turing", reps: {amount: 35}, userBest: true, date: moment('2014-11-09').toDate()})
 
-    Results.direct.insert({competitionId: burpiesId, competition:"Burpies x 100", userId: "1234", userName: "Alan Turing", time: {mins: 6, secs: 52}, userBest: true, date: moment('2014-11-24').toDate()})
+    Results.direct.insert({competitionId: burpiesId, competition:"Burpies x 100", userId: "1234", userName: "Alan Turing", time: {mins: 6, secs: 52, totalSecs: 352}, userBest: true, date: moment('2014-11-24').toDate()})

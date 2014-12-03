@@ -24,10 +24,11 @@
 
     better
 
-  # NOTE - changing this to not set user or competition id here so it is more flexible in what we pass in,
-  # such as if want to associate various users and competitions from an admin view
-
   doc.createdAt = moment().toDate()
+  # store timeAsSecs if this is time-based, makes it easier to graph & compare
+  if competition.scheme is 'time'
+    minsToSecs = doc.time.mins * 60
+    doc.time.totalSecs = minsToSecs + doc.time.secs
 
   competition = Competitions.findOne(doc.competitionId)
 
