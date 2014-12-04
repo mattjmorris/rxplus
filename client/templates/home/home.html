@@ -10,12 +10,12 @@
       <tr>
         <td><a class="href" href="/competition/{{_id}}"> {{ name }} </a></td>
         {{#if topMale.userName}}
-          <td class="h6">{{ topMale.userName }} <span class="label label-success">{{ topMaleValue }}</span></td>
+          <td class="h6">{{ topMale.userName }} <span class="label label-success">{{ topMale.values.display }}</span></td>
         {{else}}
           <td class="h6">-</td>
         {{/if}}
         {{#if topFemale.userName}}
-          <td class="h6">{{ topFemale.userName }} <span class="label label-success">{{ topFemaleValue }}</span></td>
+          <td class="h6">{{ topFemale.userName }} <span class="label label-success">{{ topFemale.values.display }}</span></td>
         {{else}}
           <td class="h6">-</td>
         {{/if}}

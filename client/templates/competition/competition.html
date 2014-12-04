@@ -27,7 +27,7 @@
       <tr>
         <td>{{ index }}</td>
         <td>{{ userName }}</td>
-        <td>{{ value }}</td>
+        <td>{{ values.display }}</td>
       </tr>
     {{/each}}
     </tbody>
@@ -79,50 +79,4 @@
   <div id="chart"></div>
 </template>
 
-<!--<template name="results">-->
-  <!--<ol class="leaderboard">-->
-    <!--{{#each players}}-->
-      <!--{{> player}}-->
-    <!--{{/each}}-->
-  <!--</ol>-->
-
-  <!--{{#if selectedName}}-->
-    <!--{{> history}}-->
-  <!--{{/if}}-->
-<!--</template>-->
-
-<!--<template name="player">-->
-  <!--<li class="player {{selected}}">-->
-    <!--<span class="name">{{name}}</span>-->
-    <!--<span class="score">{{value}}</span>-->
-  <!--</li>-->
-<!--</template>-->
-
-<!--<template name="history">-->
-  <!--<div>-->
-    <!--<div class="text-center h3">{{selectedName}}</div>-->
-
-    <!--<table class="table table-striped">-->
-      <!--<tbody>-->
-      <!--<tr>-->
-        <!--{{#if selectedNameIsCurrentUser}}-->
-          <!--<th></th>{{/if}}-->
-        <!--<th>Date</th>-->
-        <!--<th>Number</th>-->
-      <!--</tr>-->
-      <!--{{#each playerDetails selectedName}}-->
-        <!--<tr>-->
-          <!--{{#if selectedNameIsCurrentUser}}-->
-            <!--<td>-->
-              <!--<button id="delete" class="btn btn-xs btn-danger">&times;</button>-->
-            <!--</td>-->
-          <!--{{/if}}-->
-          <!--<td>{{formatDate date}}</td>-->
-          <!--<td>{{value}}</td>-->
-        <!--</tr>-->
-      <!--{{/each}}-->
-      <!--</tbody>-->
-    <!--</table>-->
-  <!--</div>-->
-<!--</template>-->
 

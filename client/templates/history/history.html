@@ -1,0 +1,19 @@
+<template name="history">
+
+  <table class="table table-striped">
+    <tbody>
+    <tr>
+      <th>Date</th>
+      <th>Competition</th>
+      <th>Result</th>
+    </tr>
+    {{#each results}}
+      <tr>
+        <td>{{ formatDate date }}</td>
+        <td>{{ competitionName }}</td>
+        <td>{{ values.display }}</td>
+      </tr>
+    {{/each}}
+    </tbody>
+  </table>
+</template>

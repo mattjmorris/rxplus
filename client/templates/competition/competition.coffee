@@ -13,16 +13,16 @@ Template.addNew.events {
 
     dateStr = event.target.date.value
     if @competition.scheme is 'reps'
-      amount = {'amount': parseInt event.target.reps.value}
+      data = {reps: parseInt event.target.reps.value}
     else
       mins = parseInt event.target.mins.value
       secs = parseInt event.target.secs.value
-      amount = {mins: mins, secs: secs}
+      data = {mins: mins, secs: secs}
 
-    unless dateStr and (amount.amount or (amount.mins and amount.secs))
+    unless dateStr? and (data.reps? or (data.mins? and data.secs?))
       FlashMessages.sendError("Please fill out date and all data fields");
       console.log dateStr
-      console.log amount
+      console.log data
       throw new Meteor.Error("Missing data")
 
     newResult = {
@@ -31,13 +31,10 @@ Template.addNew.events {
       userId: Meteor.userId(),
       userName: Meteor.user().profile.name,
       date: moment(dateStr).toDate()
+      values: {data: data}
     }
-    newResult[@competition.scheme] = amount
-
     Results.insert newResult
-
     Session.set("addingNew", false)
-
 
   'click #cancel': (event) ->
     event.preventDefault()
@@ -50,20 +47,11 @@ Template.addNew.events {
 ###
 Template.competition.helpers {
   userTopResult: ->
-    sortOrder = @competition.sortOrder
-    if @competition.scheme is 'reps'
-      sortObj = {'reps.amount': sortOrder, date: 1}
-    else if @competition.scheme is 'time'
-      sortObj = {'time.mins': sortOrder, 'time.secs': sortOrder, date: 1}
     Results.find(
       {},
-      { sort: sortObj}
+      { sort: {'values.abs': @competition.sortOrder, data: 1 } }
     ).map (document, index) =>
       document.index = index + 1
-      if @competition.scheme is 'reps'
-        document.value = document.reps.amount
-      else if @competition.scheme is 'time'
-        document.value = document.time.mins + ":" + document.time.secs
       document
 }
 
@@ -81,7 +69,7 @@ Template.chart_cp_overview.created = ->
           height: 100
         },
         data: {
-          columns: _.map Results.find({}).fetch(), (r) -> [r.userName, r.time?.totalSecs or r.reps?.amount],
+          columns: _.map Results.find({}).fetch(), (r) -> [r.userName, r.values.abs],
           types: {
             data1: 'area',
             data2: 'area'
@@ -89,7 +77,7 @@ Template.chart_cp_overview.created = ->
         }
         grid: {
           y: {
-            lines: [{value: Session.get('selectedSeconds'), text: Session.get('selectedName')}]
+            lines: [{value: Results.findOne({userId: Meteor.userId()})?.values?.abs, text: Meteor.user()?.profile?.name}]
           }
         }
         axis: {
@@ -100,6 +88,10 @@ Template.chart_cp_overview.created = ->
             }
           }
           y: {
+            tick: {
+              format: (x) ->
+                if Math.round(x * 100) / 100 is Math.floor(x) then Math.round(x) else ''
+            }
             label: if Competitions.findOne().scheme is 'reps' then 'reps' else 'total seconds'
           }
         }
