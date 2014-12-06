@@ -1,8 +1,6 @@
 Template.addNew.helpers {
   'today': ->
     moment().format('YYYY-MM-DD')
-  'addingNew': ->
-    Session.equals("addingNew", true)
   'repsScheme': ->
     @competition.scheme is 'reps'
 }
@@ -46,8 +44,13 @@ Template.addNew.events {
   and 'map' in an index so we can show position of each user's best result.
 ###
 Template.competition.helpers {
+  'addingNew': ->
+    Session.equals("addingNew", true)
+}
+
+Template.results.helpers {
   userTopResult: ->
-#    debugger
+    #    debugger
     Results.find(
       {},
       { sort: {'values.abs': @competition.sortOrder, data: 1 } }
