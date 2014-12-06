@@ -47,6 +47,7 @@ Template.addNew.events {
 ###
 Template.competition.helpers {
   userTopResult: ->
+#    debugger
     Results.find(
       {},
       { sort: {'values.abs': @competition.sortOrder, data: 1 } }
