@@ -1,11 +1,13 @@
 <template name="home">
-  <table class="table table-striped">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Challenge</th>
+        <th>Male</th>
+        <th>Female</th>
+      </tr>
+    </thead>
     <tbody>
-    <tr>
-      <th>Challenge</th>
-      <th>Male</th>
-      <th>Female</th>
-    </tr>
     {{#each competitions}}
       <tr>
         <td><a class="href" href="/competition/{{_id}}"> {{ name }} </a></td>

@@ -1,12 +1,16 @@
 <template name="history">
 
-  <table class="table table-striped">
+  <h1>History</h1>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Competition</th>
+        <th>Result</th>
+      </tr>
+    </thead>
     <tbody>
-    <tr>
-      <th>Date</th>
-      <th>Competition</th>
-      <th>Result</th>
-    </tr>
     {{#each results}}
       <tr>
         <td>{{ formatDate date }}</td>
@@ -16,4 +20,5 @@
     {{/each}}
     </tbody>
   </table>
+
 </template>
