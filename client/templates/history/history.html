@@ -1,6 +1,9 @@
 <template name="history">
 
-  <h1>History</h1>
+  <h2>History</h2>
+  <h4>{{currentUser.profile.name}}</h4>
+
+  {{> chart }}
 
   <table class="table">
     <thead>
@@ -21,4 +24,8 @@
     </tbody>
   </table>
 
+</template>
+
+<template name="chart">
+    <div id="chart"></div>
 </template>

@@ -14,9 +14,14 @@ Router.route 'history',
   waitOn: ->
     Meteor.subscribe('results', {userId: Meteor.userId()})
   data: ->
-    results: Results.find({}, {sort: {date: -1}})
+    # use aggregation framework here to aggregate by compName,sorted by date?
+    results: Results.find({}, {sort: {competitionName: 1, date: 1}})
+#    chartData: Results.aggregate [
+#      {$sort: {date: 1}},
+#      { $group: { _id: "$competitionName", vals: { $push: "$values.abs"} } }
+#    ]
 
-  # TODO - change everything here to use ids, including the route
+
 Router.route '/competition/:_id', {
     name: 'competition'
     waitOn: ->
