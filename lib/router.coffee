@@ -15,11 +15,7 @@ Router.route 'history',
     Meteor.subscribe('results', {userId: Meteor.userId()})
   data: ->
     # use aggregation framework here to aggregate by compName,sorted by date?
-    results: Results.find({}, {sort: {competitionName: 1, date: 1}})
-#    chartData: Results.aggregate [
-#      {$sort: {date: 1}},
-#      { $group: { _id: "$competitionName", vals: { $push: "$values.abs"} } }
-#    ]
+    results: Results.find({}, {sort: {competitionName: 1, date: 1}}).fetch()
 
 
 Router.route '/competition/:_id', {
