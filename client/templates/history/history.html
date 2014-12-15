@@ -1,35 +1,36 @@
 <template name="history">
 
-  <h2>History</h2>
   <h3>{{currentUser.profile.name}}</h3>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Competition</th>
+        <th>PR</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each competitionNames}}
+        <tr>
+          <td><a href="#{{nameForId name }}h">{{ name }}</a></td>
+          <td>{{ bestValue name }}</td>
+          <td>{{ bestDate name }}</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+  <br>
 
   {{#each competitionNames}}
     {{> chart }}
   {{/each}}
 
-  <!--<table class="table">-->
-    <!--<thead>-->
-      <!--<tr>-->
-        <!--<th>Date</th>-->
-        <!--<th>Competition</th>-->
-        <!--<th>Result</th>-->
-      <!--</tr>-->
-    <!--</thead>-->
-    <!--<tbody>-->
-    <!--{{#each results}}-->
-      <!--<tr>-->
-        <!--<td>{{ formatDate date }}</td>-->
-        <!--<td>{{ competitionName }}</td>-->
-        <!--<td>{{ values.display }}</td>-->
-      <!--</tr>-->
-    <!--{{/each}}-->
-    <!--</tbody>-->
-  <!--</table>-->
-
 </template>
 
 <template name="chart">
-  <h4>{{ name }}</h4>
-  <h5>Best = {{bestValue name}} on {{bestDate name}}</h5>
+  <div class="h4" id="{{nameForId name }}h">{{ name }}</div>
   <div id="{{nameForId name }}"></div>
+  <hr>
 </template>

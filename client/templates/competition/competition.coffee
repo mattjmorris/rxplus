@@ -9,18 +9,20 @@ Template.addNew.events {
   'submit': (event) ->
     event.preventDefault()
 
+    valForDisplay = ""
     dateStr = event.target.date.value
     if @competition.scheme is 'reps'
-      data = {reps: parseInt event.target.reps.value}
+      reps = parseInt event.target.reps.value
+      data = {reps: reps}
+      valForDisplay = reps
     else
       mins = parseInt event.target.mins.value
       secs = parseInt event.target.secs.value
       data = {mins: mins, secs: secs}
+      valForDisplay = (moment.duration(mins, 'm').add(moment.duration(secs, 's'))).format()
 
     unless dateStr? and (data.reps? or (data.mins? and data.secs?))
       FlashMessages.sendError("Please fill out date and all data fields");
-      console.log dateStr
-      console.log data
       throw new Meteor.Error("Missing data")
 
     newResult = {
@@ -33,6 +35,10 @@ Template.addNew.events {
     }
     Results.insert newResult
     Session.set("addingNew", false)
+    FlashMessages.sendSuccess(
+      "New result added for #{valForDisplay} on #{moment(dateStr).format("MM/DD/YYYY")}",
+      { hideDelay: 5000 }
+    )
 
   'click #cancel': (event) ->
     event.preventDefault()
@@ -50,7 +56,6 @@ Template.competition.helpers {
 
 Template.results.helpers {
   userTopResult: ->
-    #    debugger
     Results.find(
       {},
       { sort: {'values.abs': @competition.sortOrder, data: 1 } }
@@ -106,3 +111,7 @@ Template.chart_cp_overview.created = ->
           grouped: false
         }
       }
+
+Template.registerHelper 'formatDate', (context, options) ->
+  if context
+    moment(context).format('MM/DD/YYYY')

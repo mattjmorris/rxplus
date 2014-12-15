@@ -25,21 +25,31 @@
     Is this the best result for this user, out of all of the user's results for this competition?
     Note (new.values.abs - old.values.abs) * sortOrder should always be < 0 if new one is 'better'
   ###
-  newBest = true
+  userBest = true
   existingResult = Results.findOne({competitionId: doc.competitionId, userId: doc.userId, userBest: true})
   if existingResult?
-    newBest = (doc.values.abs - existingResult.values.abs) * competition.sortOrder < 0
-    Results.update({_id: existingResult._id}, {$set: {userBest: false}}) if newBest
-  doc.userBest = newBest
+    userBest = (doc.values.abs - existingResult.values.abs) * competition.sortOrder < 0
+    Results.update({_id: existingResult._id}, {$set: {userBest: false}}) if userBest
+  doc.userBest = userBest
 
   ###
     Is this the best result for the competition, for this gender?
   ###
-  newBest = true
+  compBest = true
   topResultsForGender = {}
   topGenderStr = "top" + _.capitalize(Meteor.user().services.facebook.gender)
   if competition[topGenderStr]?.values?
-    newBest = (doc.values.abs - competition[topGenderStr].values.abs) * competition.sortOrder < 0
-  if newBest
+    compBest = (doc.values.abs - competition[topGenderStr].values.abs) * competition.sortOrder < 0
+  if compBest
     topResultsForGender[topGenderStr] = {userId: userId, userName: Meteor.user().profile.name, values: doc.values}
     Competitions.update({_id: competition._id}, {$set: topResultsForGender})
+
+  try
+    if userBest
+      FlashMessages.sendSuccess("New PR")
+    else
+      FlashMessages.sendInfo("Keep working on your PR")
+    if compBest
+      FlashMessages.sendSuccess("New Competition Top Result")
+  catch error
+    console.log "error sending flash message (kind of)"

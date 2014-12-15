@@ -23,17 +23,17 @@
   <table class="table">
     <thead>
       <tr>
-        <th>#</th>
         <th>User</th>
         <th>Result</th>
+        <th>Date</th>
       </tr>
     </thead>
     <tbody>
     {{#each userTopResult}}
       <tr>
-        <td>{{ index }}</td>
         <td>{{ userName }}</td>
         <td>{{ values.display }}</td>
+        <td>{{ formatDate date }}</td>
       </tr>
     {{/each}}
     </tbody>

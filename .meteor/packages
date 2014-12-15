@@ -14,7 +14,14 @@ service-configuration
 iron:router
 sacha:spin
 matb33:collection-hooks
-mrt:flash-messages
 underscore
 peernohell:c3
 meteorhacks:aggregate
+meteorhacks:npm
+
+
+npm-container
+mquandalle:bower
+mrt:flash-messages
+wizonesolutions:underscore-string
+

@@ -1,0 +1,8 @@
+{
+  "packages": {
+    "bower": {}
+  },
+  "bower": {
+    "moment-duration-format": "1.3.0"
+  }
+}
