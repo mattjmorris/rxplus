@@ -18,10 +18,9 @@ Router.route 'history',
 
 Router.route 'feed',
   waitOn: ->
-    Meteor.subscribe('results', {})
+    Meteor.subscribe('resultsForFeed')
   data: ->
-    # TODO - make reactive with limit
-    results: Results.find({}, {sort: {date: -1}})
+    results: Results.find()
 
 Router.route '/competition/:_id', {
     name: 'competition'

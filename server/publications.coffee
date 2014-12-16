@@ -4,8 +4,8 @@ Meteor.publish 'competitions', (params) ->
 Meteor.publish 'results', (params) ->
   Results.find(params)
 
-Meteor.publish 'feed', ->
-  Feed.find()
+Meteor.publish 'resultsForFeed', ->
+  Results.find({}, {sort: {date: -1}, limit: 10})
 
 Meteor.publish "userData", ->
   if (@userId)
