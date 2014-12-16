@@ -1,13 +1,13 @@
 <template name="history">
 
-  <h3>{{currentUser.profile.name}}</h3>
-
+  <h3>All Challenge PRs for {{currentUser.profile.name}}</h3>
+  <br>
   <table class="table">
     <thead>
       <tr>
-        <th>Competition</th>
+        <th>Challenge</th>
         <th>PR</th>
-        <th></th>
+        <th>When?</th>
       </tr>
     </thead>
     <tbody>
@@ -22,6 +22,11 @@
   </table>
 
   <br>
+  <br>
+
+  <h3>Full History for {{currentUser.profile.name}}</h3>
+
+  <br>
 
   {{#each competitionNames}}
     {{> chart }}
@@ -30,7 +35,17 @@
 </template>
 
 <template name="chart">
-  <div class="h4" id="{{nameForId name }}h">{{ name }}</div>
-  <div id="{{nameForId name }}"></div>
-  <hr>
+
+  <div class="panel panel-default" id="{{nameForId name }}h">
+    <div class="panel-heading">
+      <h4 class="panel-title">{{ name }}</h4>
+    </div>
+    <div class="panel-body">
+      <div id="{{nameForId name }}"></div>
+    </div>
+  </div>
+
+  <!--<div class="h4" id="{{nameForId name }}h">{{ name }}</div>-->
+  <!--<div id="{{nameForId name }}"></div>-->
+  <!--<hr>-->
 </template>
