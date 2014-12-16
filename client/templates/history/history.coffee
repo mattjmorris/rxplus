@@ -63,6 +63,7 @@ Template.chart.created = ->
           show: false
           padding:
             top: 20
+          min: 0
 
   scheme = if Results.findOne({competitionName: @data.name}).values.data.mins? then 'time' else 'reps'
   Meteor.call 'historyChart', @data.name, (e, d) =>

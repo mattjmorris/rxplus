@@ -1,6 +1,6 @@
 Template.addNew.helpers {
-  'today': ->
-    moment().format('YYYY-MM-DD')
+  'now': ->
+    moment().format("YYYY-MM-DD") + "T" + moment().format('H:mm')
   'repsScheme': ->
     @competition.scheme is 'reps'
 }
@@ -19,9 +19,10 @@ Template.addNew.events {
       mins = parseInt event.target.mins.value
       secs = parseInt event.target.secs.value
       data = {mins: mins, secs: secs}
-      valForDisplay = (moment.duration(mins, 'm').add(moment.duration(secs, 's'))).format()
+      # add 1 ms to overcome rounding bug where 12 secs was rounded to 11
+      valForDisplay = (moment.duration(mins, 'm').add(moment.duration(secs, 's')).add(moment.duration(1, 'ms'))).format("m:ss", { trim: false })
 
-    unless dateStr? and (data.reps? or (data.mins? and data.secs?))
+    unless dateStr? and (data.reps > 0 or (data.mins >=0 and data.secs >= 0 and data.mins + data.secs > 0))
       FlashMessages.sendError("Please fill out date and all data fields");
       throw new Meteor.Error("Missing data")
 
@@ -31,7 +32,7 @@ Template.addNew.events {
       userId: Meteor.userId(),
       userName: Meteor.user().profile.name,
       date: moment(dateStr).toDate()
-      values: {data: data}
+      values: {display: valForDisplay, data: data}
     }
     Results.insert newResult
     Session.set("addingNew", false)

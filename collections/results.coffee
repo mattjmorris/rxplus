@@ -14,10 +14,8 @@
   ###
   if competition.scheme is 'time'
     doc.values.abs = doc.values.data.mins * 60 + doc.values.data.secs
-    doc.values.display = _.pad(doc.values.data.mins + "", 2, '0') + ":" + _.pad(doc.values.data.secs + "", 2, '0')
   else if competition.scheme is 'reps'
     doc.values.abs = doc.values.data.reps
-    doc.values.display = doc.values.data.reps + ""
   else
     throw Meteor.Error("Unknown scheme: #{competition.scheme}")
 
@@ -35,17 +33,30 @@
   ###
     Is this the best result for the competition, for this gender?
   ###
+  competition = Competitions.findOne(doc.competitionId)
   compBest = true
   topResultsForGender = {}
-  topGenderStr = "top" + _.capitalize(Meteor.user().services.facebook.gender)
+  gender = Meteor.user().services.facebook.gender
+  topGenderStr = "top" + _.capitalize(gender)
   if competition[topGenderStr]?.values?
     compBest = (doc.values.abs - competition[topGenderStr].values.abs) * competition.sortOrder < 0
   if compBest
+    # update the competition
     topResultsForGender[topGenderStr] = {userId: userId, userName: Meteor.user().profile.name, values: doc.values}
     Competitions.update({_id: competition._id}, {$set: topResultsForGender})
+    # update existing result (if found), and set current doc as competition best for gender
+    existingResult = Results.findOne({competitionId: doc.competitionId, competitionBest: gender})
+    # TODO - test that this works correctly !
+    Results.update({_id: existingResult._id}, {$set: {competitionBest: null}}) if existingResult
+    doc.competitionBest = gender
+
+  ###
+    Add the new info to the feed collection
+  ###
+#  Feed.insert({userName: doc.userName, competitionName: competition.name, display: doc.values.display, userBest: doc.userBest, competitionBest: compBest})
 
   try
-    if userBest
+    if doc.userBest
       FlashMessages.sendSuccess("New PR")
     else
       FlashMessages.sendInfo("Keep working on your PR")

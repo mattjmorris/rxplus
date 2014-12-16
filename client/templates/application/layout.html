@@ -15,13 +15,16 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="{{ pathFor 'home' }}">rxPlus</a>
+        <a class="navbar-brand" href="{{ pathFor 'home' }}">Challenges</a>
       </div>
       <div class="collapse navbar-collapse" id="navbar-collapse">
         {{#if currentUser}}
         <ul class="nav navbar-nav">
-          <li><a class="btn" href="{{ pathFor 'history' }}">History</a></li>
-          <li><a class="btn" href="{{ pathFor 'create' }}">Create</a></li>
+          <li><a class="btn" href="{{ pathFor 'history' }}">My History</a></li>
+          <li><a class="btn" href="{{ pathFor 'feed' }}">Live Feed</a></li>
+          {{#if userIsMattMorris}}
+            <li><a class="btn" href="{{ pathFor 'create' }}">Create New</a></li>
+          {{/if}}
         </ul>
         {{/if}}
         <ul class="nav navbar-nav navbar-right">

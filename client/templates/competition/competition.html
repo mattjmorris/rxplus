@@ -45,25 +45,25 @@
     <div class="row">
       <div class="col-lg-4 col-md-6 col-xs-12">
         <div class="form-group">
-          <label for="date" class="control-label">Date</label>
-          <input id="date" type="date" class="form-control" name="date" value="{{today}}">
+          <label for="date" class="control-label">Completed On</label>
+          <input id="date" type="datetime-local" class="form-control" name="date" value="{{now}}">
         </div>
       </div>
       <div class="col-lg-4 col-md-6 col-xs-12">
         {{#if repsScheme}}
         <div class="form-group">
           <label for="number" class="control-label">Number</label>
-          <input id="number" class="form-control" type="number" name="reps" placeholder="0">
+          <input id="number" class="form-control" type="number" name="reps" value="0" min="1">
         </div>
         {{else}}
         <div class="form-group">
           <label for="number" class="control-label">Time</label>
           <div class="row">
             <div class="col-xs-6">
-              <input id="mins" class="form-control" type="number" name="mins" placeholder="mins">
+              <input id="mins" class="form-control" type="number" name="mins" placeholder="mins" min="0">
             </div>
             <div class="col-xs-6">
-              <input id="secs" class="form-control" type="number" name="secs" placeholder="secs">
+              <input id="secs" class="form-control" type="number" name="secs" placeholder="secs" min="0">
             </div>
           </div>
         </div>

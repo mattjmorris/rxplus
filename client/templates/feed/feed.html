@@ -1,0 +1,29 @@
+<template name="feed">
+  <div class="well">
+    <div class="row-fluid h3">
+      Activity Feed
+    </div>
+    <span><i class="fa fa-arrow-circle-up"></i> = PR, </span>
+    <span><i class="fa fa-trophy"></i> = PR + Competition Best (M/F)</span>
+  </div>
+  {{#each results}}
+    <!-- todo: style if PR and or CR-->
+    <div class="alert {{alertType}}" role="alert">
+      <!--{{log}}-->
+      {{ userName }} : <strong>{{ competitionName }}</strong>
+      <span class="badge">{{ values.display }}</span>
+        {{#if showPRIcon}}
+        <i class="fa fa-arrow-circle-up"></i>
+      {{/if}}
+      {{#if competitionBest}}
+        <i class="fa fa-trophy"></i>
+        {{#if bestMale}}
+          <i class="fa fa-male"></i>
+        {{/if}}
+        {{#if bestFemale}}
+          <i class="fa fa-female"></i>
+        {{/if}}
+      {{/if}}
+    </div>
+  {{/each}}
+</template>
