@@ -3,7 +3,7 @@ Meteor.startup ->
     when "http://localhost:3000/"
       { appId: '1494763437453412', secret: '6ca43a0e51b9a09165615a32e68ca02a' }
     else
-      { appId: '874064879279555', secret: '9f93b366e007b6fd8a70c3e29f09330c' }
+      { appId: '1595681620660773', secret: '967787fe518ca14c0033918ac13fadb3' }
   config.service = "facebook"
   config.loginStyle = "redirect"
 
