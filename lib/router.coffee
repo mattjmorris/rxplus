@@ -22,6 +22,8 @@ Router.route 'feed',
   data: ->
     results: Results.find()
 
+Router.route 'profile'
+
 Router.route '/competition/:_id', {
     name: 'competition'
     waitOn: ->
