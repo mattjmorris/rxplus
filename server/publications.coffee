@@ -7,6 +7,11 @@ Meteor.publish 'results', (params) ->
 Meteor.publish 'resultsForFeed', ->
   Results.find({}, {sort: {date: -1}, limit: 10})
 
+#Meteor.publish 'topNMalesResults', (N) ->
+#  Results.find({gender: 'male'}, {sort: {values.abs}})
+
+#Meteor.publish 'topNFemaleResults'
+
 Meteor.publish "userData", ->
   if (@userId)
     Meteor.users.find({_id: @userId}, {fields: {'services.facebook.gender': 1}})

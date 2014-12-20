@@ -1,5 +1,6 @@
 Template.addNew.helpers {
   'now': ->
+    console.log moment().format("YYYY-MM-DD") + "T" + moment().format('H:mm')
     moment().format("YYYY-MM-DD") + "T" + moment().format('H:mm')
   'repsScheme': ->
     @competition.scheme is 'reps'

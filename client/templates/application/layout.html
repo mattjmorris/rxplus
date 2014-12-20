@@ -18,16 +18,16 @@
         <a class="navbar-brand" href="{{ pathFor 'home' }}">Challenges</a>
       </div>
       <div class="collapse navbar-collapse" id="navbar-collapse">
-        {{#if currentUser}}
         <ul class="nav navbar-nav">
-          <li><a class="btn" href="{{ pathFor 'history' }}">My History</a></li>
           <li><a class="btn" href="{{ pathFor 'feed' }}">Live Feed</a></li>
-          {{#if userIsMattMorris}}
-            <li><a class="btn" href="{{ pathFor 'create' }}">Create New</a></li>
+          {{#if currentUser}}
+            <li><a class="btn" href="{{ pathFor 'history' }}">My History</a></li>
+            {{#if userIsMattMorris}}
+              <li><a class="btn" href="{{ pathFor 'create' }}">Create New</a></li>
+            {{/if}}
+            <li><a class="btn" href="{{ pathFor 'profile' }}">My Profile</a></li>
           {{/if}}
-          <li><a class="btn" href="{{ pathFor 'profile' }}">My Profile</a></li>
         </ul>
-        {{/if}}
         <ul class="nav navbar-nav navbar-right">
           <li>{{> loginButtons}}</li>
         </ul>
