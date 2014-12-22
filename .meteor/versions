@@ -1,6 +1,5 @@
 accounts-base@1.1.3
-accounts-facebook@1.0.3
-accounts-oauth@1.1.3
+accounts-password@1.0.5
 accounts-ui@1.1.4
 accounts-ui-unstyled@1.1.5
 application-configuration@1.0.4
@@ -16,10 +15,11 @@ coffeescript@1.0.5
 ddp@1.0.13
 deps@1.0.6
 ejson@1.0.5
-facebook@1.1.3
+email@1.0.5
 fastclick@1.0.2
 follower-livedata@1.0.3
 geojson-utils@1.0.2
+handlebars@1.0.2
 html-tools@1.0.3
 htmljs@1.0.3
 http@1.0.9
@@ -33,6 +33,8 @@ iron:location@1.0.6
 iron:middleware-stack@1.0.6
 iron:router@1.0.6
 iron:url@1.0.6
+joshowens:accounts-entry@1.0.3
+joshowens:simple-form@0.2.2
 jquery@1.0.2
 json@1.0.2
 launch-screen@1.0.1
@@ -57,9 +59,9 @@ mongo-livedata@1.0.7
 mquandalle:bower@0.1.11
 mrt:flash-messages@1.0.0
 mrt:moment@2.8.1
+mrt:underscore-string-latest@2.3.3
+npm-bcrypt@0.7.7
 npm-container@1.0.0
-oauth@1.1.3
-oauth2@1.1.2
 observe-sequence@1.0.4
 ordered-dict@1.0.2
 peernohell:c3@1.1.1
@@ -70,11 +72,15 @@ reload@1.1.2
 retry@1.0.2
 routepolicy@1.0.3
 sacha:spin@2.0.4
+schnie:uploader@2.0.3
 sergeyt:d3@3.4.1
 service-configuration@1.0.3
 session@1.0.5
+sha@1.0.2
+softwarerero:accounts-t9n@1.0.3
 spacebars@1.0.4
 spacebars-compiler@1.0.4
+srp@1.0.2
 templating@1.0.10
 tracker@1.0.4
 ui@1.0.5

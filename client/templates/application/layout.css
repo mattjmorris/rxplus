@@ -1,4 +1,5 @@
 .navbar-right #login-buttons {
-  padding:10px;
+  padding:5px;
   color:#9d9d9d;
+  display:inline;
 }

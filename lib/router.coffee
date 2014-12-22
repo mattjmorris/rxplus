@@ -8,6 +8,8 @@ Router.route '/',
     Meteor.subscribe('competitions', {})
   name: 'home'
 
+Router.route 'dashboard'
+
 Router.route 'create'
 
 Router.route 'history',

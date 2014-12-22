@@ -17,6 +17,7 @@
         </button>
         <a class="navbar-brand" href="{{ pathFor 'home' }}">Challenges</a>
       </div>
+
       <div class="collapse navbar-collapse" id="navbar-collapse">
         <ul class="nav navbar-nav">
           <li><a class="btn" href="{{ pathFor 'feed' }}">Live Feed</a></li>
@@ -27,9 +28,10 @@
             {{/if}}
             <li><a class="btn" href="{{ pathFor 'profile' }}">My Profile</a></li>
           {{/if}}
+
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li>{{> loginButtons}}</li>
+          {{> accountButtons}}
         </ul>
       </div>
     </div>
