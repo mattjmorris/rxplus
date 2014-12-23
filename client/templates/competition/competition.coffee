@@ -4,6 +4,8 @@ Template.addNew.helpers {
     moment().format("YYYY-MM-DD") + "T" + moment().format('H:mm')
   'repsScheme': ->
     @competition.scheme is 'reps'
+  'weightScheme': ->
+    @competition.scheme is 'weight'
 }
 
 Template.addNew.events {
@@ -16,6 +18,10 @@ Template.addNew.events {
       reps = parseInt event.target.reps.value
       data = {reps: reps}
       valForDisplay = reps
+    else if @competition.scheme is 'weight'
+      weight = parseFloat event.target.weight.value
+      data = {weight: weight}
+      valForDisplay = weight
     else
       mins = parseInt event.target.mins.value
       secs = parseInt event.target.secs.value
@@ -23,7 +29,7 @@ Template.addNew.events {
       # add 1 ms to overcome rounding bug where 12 secs was rounded to 11
       valForDisplay = (moment.duration(mins, 'm').add(moment.duration(secs, 's')).add(moment.duration(1, 'ms'))).format("m:ss", { trim: false })
 
-    unless dateStr? and (data.reps > 0 or (data.mins >=0 and data.secs >= 0 and data.mins + data.secs > 0))
+    unless dateStr? and (data.reps > 0 or data.weight > 0 or (data.mins >=0 and data.secs >= 0 and data.mins + data.secs > 0))
       FlashMessages.sendError("Please fill out date and all data fields");
       throw new Meteor.Error("Missing data")
 
@@ -103,7 +109,7 @@ Template.chart_cp_overview.created = ->
               format: (x) ->
                 if Math.round(x * 100) / 100 is Math.floor(x) then Math.round(x) else ''
             }
-            label: if Competitions.findOne().scheme is 'reps' then 'reps' else 'total seconds'
+            label: Competitions.findOne().scheme
           }
         }
         legend: {

@@ -16,6 +16,8 @@
     doc.values.abs = doc.values.data.mins * 60 + doc.values.data.secs
   else if competition.scheme is 'reps'
     doc.values.abs = doc.values.data.reps
+  else if competition.scheme is 'weight'
+    doc.values.abs = doc.values.data.weight
   else
     throw Meteor.Error("Unknown scheme: #{competition.scheme}")
 
@@ -36,7 +38,7 @@
   competition = Competitions.findOne(doc.competitionId)
   compBest = true
   topResultsForGender = {}
-  gender = Meteor.user().services.facebook.gender
+  gender = Meteor.user().profile.gender
   topGenderStr = "top" + _.capitalize(gender)
   if competition[topGenderStr]?.values?
     compBest = (doc.values.abs - competition[topGenderStr].values.abs) * competition.sortOrder < 0

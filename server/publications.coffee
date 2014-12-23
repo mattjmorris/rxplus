@@ -14,7 +14,7 @@ Meteor.publish 'resultsForFeed', ->
 
 Meteor.publish "userData", ->
   if (@userId)
-    Meteor.users.find({_id: @userId}, {fields: {'services.facebook.gender': 1}})
+    Meteor.users.find({_id: @userId}, {fields: {'services.profile.gender': 1}})
   else
     @ready()
 

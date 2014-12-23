@@ -12,6 +12,13 @@ Meteor.startup ->
         required: true
       },
       {
+        field: 'gender',
+        label: "Gender ('m' or 'f')",
+        type: 'text',
+        name: 'male',
+        required: true
+      },
+      {
         field: 'feet',
         label: 'Your height - number of FEET (3-7)',
         type: 'number',
