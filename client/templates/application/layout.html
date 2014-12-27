@@ -15,13 +15,13 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="{{ pathFor 'home' }}">Challenges</a>
       </div>
 
       <div class="collapse navbar-collapse" id="navbar-collapse">
         <ul class="nav navbar-nav">
-          <li><a class="btn" href="{{ pathFor 'feed' }}">Live Feed</a></li>
           {{#if currentUser}}
+            <li><a class="btn" href="{{ pathFor 'home' }}">All Challenges</a></li>
+            <li><a class="btn" href="{{ pathFor 'feed' }}">Live Feed</a></li>
             <li><a class="btn" href="{{ pathFor 'history' }}">My History</a></li>
             {{#if userIsMattMorris}}
               <li><a class="btn" href="{{ pathFor 'create' }}">Create New</a></li>

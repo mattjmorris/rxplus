@@ -6,6 +6,8 @@ Template.profile.events
     feet = template.$('#feet').val()
     inches = template.$('#inches').val()
     birthdate = template.$('#birthdate').val()
+    affiliation = template.$('#affiliation').val()
+    gender = template.$('#gender').val()
     Meteor.users.update(
       { _id: Meteor.user()._id},
       {
@@ -15,6 +17,8 @@ Template.profile.events
           "profile.feet": feet,
           "profile.inches": inches,
           "profile.birthdate": birthdate
+          "profile.affiliation": affiliation
+          "profile.gender": gender
         }
       },
       (e, n) ->
@@ -25,4 +29,7 @@ Template.profile.events
 
 Template.profile.helpers
   userBirthdate: ->
-    moment(Meteor.user().profile.birthdate).format('YYYY-MM-DD')
+    if Meteor.user().profile.birthdate?
+      moment(Meteor.user().profile.birthdate).format('YYYY-MM-DD')
+    else
+      '1986-01-01'

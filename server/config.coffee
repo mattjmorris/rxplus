@@ -10,3 +10,6 @@ Meteor.startup ->
   # remove the config in case it already exists and replace it with our custom config
   Accounts.loginServiceConfiguration.remove { service: "facebook" }
   Accounts.loginServiceConfiguration.insert config
+
+  AccountsEntry.config
+    signupCode: 'lcf'
